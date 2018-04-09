@@ -19,7 +19,7 @@ pipeline {
     stage('Deploy New Build To Kubernetes') {
 	    agent any
 	    steps{
-		    sh 'docker push gagan1109/hellowhale:latest'
+		    sh 'docker push abhidevan/kube'
 		    sh 'kubectl set image deployment/kube kube=abhidevan/kube'
 	    }
       }
