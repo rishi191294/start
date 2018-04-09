@@ -4,7 +4,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t gagan1109/hellowhale:latest .'
+        sh 'docker build -t abhidevan/kube .'
       }
     }
     stage('Docker Push') {
@@ -12,7 +12,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push gagan1109/hellowhale:latest'
+          sh 'docker push abhidevan/kube'
 	}
       }
     }
@@ -20,7 +20,7 @@ pipeline {
 	    agent any
 	    steps{
 		    sh 'docker push gagan1109/hellowhale:latest'
-		    sh 'kubectl set image deployment/hellowhale hellowhale=gagan1109/hellowhale:latest'
+		    sh 'kubectl set image deployment/kube kube=abhidevan/kube'
 	    }
       }
   }
