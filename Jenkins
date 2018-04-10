@@ -16,7 +16,7 @@ pipeline {
 	}
       }
     }
-    stage('Deploy New Build To Kubernetes') {
+    stage('Deleting the old builds') {
 	    agent any
 	    steps{
 		    sh 'docker pull abhidevan/kube'
