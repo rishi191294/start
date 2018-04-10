@@ -19,8 +19,12 @@ pipeline {
     stage('Deploy New Build To Kubernetes') {
 	    agent any
 	    steps{
-		    sh 'docker push abhidevan/kube'
+		    sh 'docker pull abhidevan/kube'
+		    sh 'kubectl delete deployments builds'
+		    sh 'kubectl delete services builds'
+		    sh 'kubectl create deployment builds --image abhidevan/kube'
 		    sh 'kubectl set image deployment/kube kube=abhidevan/kube'
+		    sh 'kubectl create service nodeport builds --tcp=80:80'
 	    }
       }
   }
