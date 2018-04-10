@@ -20,9 +20,11 @@ pipeline {
 	    agent any
 	    steps{
 		    sh 'docker pull abhidevan/kube'
+		    sh 'kubectl delete deployments kube'
+		    sh 'kubectl delete services kube'
 		    sh 'kubectl create deployment kube --image abhidevan/kube'
 		    sh 'kubectl set image deployment/kube kube=abhidevan/kube'
-		    sh 'kubectl create service nodeport builds --tcp=80:80'
+		    sh 'kubectl create service nodeport kube --tcp=80:80'
 	    }
       }
   }
