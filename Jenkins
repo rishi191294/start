@@ -16,11 +16,11 @@ pipeline {
 	}
       }
     }
-    stage('Deleting the old builds and services') {
-	    agent any
-	    steps{
-		    sh 'kubectl delete deployments kube'
-		    sh 'kubectl delete services kube' 
+    #stage('Deleting the old builds and services') {
+	    #agent any
+	    #steps{
+		    #sh 'kubectl delete deployments kube'
+		    #sh 'kubectl delete services kube' 
 		    }
 		 }
 	
