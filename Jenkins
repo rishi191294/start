@@ -4,7 +4,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t abhidevan/kube .'
+        sh 'docker build -t docker191294/kube .'
       }
     }
     stage('Docker Push') {
@@ -12,7 +12,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push abhidevan/kube'
+          sh 'docker push docker191294/kube'
 	}
       }
     }
@@ -27,9 +27,9 @@ pipeline {
 	stage('Deploying New Build To Kubernetes') {
 	    agent any
 	    steps{   
-	            sh 'docker pull abhidevan/kube'
-	    	    sh 'kubectl create deployment kube --image abhidevan/kube'
-		    sh 'kubectl set image deployments/kube kube=abhidevan/kube'
+	            sh 'docker pull docker191294/kube'
+	    	    sh 'kubectl create deployment kube --image docker191294/kube'
+		    sh 'kubectl set image deployments/kube kube=docker191294/kube'
 		    sh 'kubectl create service nodeport kube --tcp=80:80'
 	    }
       }
