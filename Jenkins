@@ -21,7 +21,6 @@ pipeline {
 	    agent any
 	    steps{   
 	            sh 'docker pull docker191294/kube:latest'
-	    	    sh 'kubectl create deployment kube --image docker191294/kube'
 		    sh 'kubectl set image deployments/kube kube=docker191294/kube:latest'
 		    sh 'kubectl create service nodeport kube --tcp=80:80'
 	    }
