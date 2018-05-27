@@ -25,7 +25,7 @@ pipeline {
 		    sh 'kubectl delete services builds'
 		    sh 'kubectl create deployment kube --image docker191294/kube'
 		    sh 'kubectl set image deployments/kube kube=docker191294/kube:latest'
-		    sh 'kubectl create service nodeport kube --tcp=80:80'
+		    sh 'kubectl create service nodeport kube --tcp=8888:8888'
 	    }
       }
   }
